@@ -6,21 +6,21 @@ import React, {
   useLayoutEffect,
   useRef,
   useState,
-} from "react";
-import { FlatList, TouchableOpacity, View, Modal } from "react-native";
-import { TextInput, Divider, Text, useTheme } from "react-native-paper";
-import type { DropdownProps } from "./types";
-import memoCompare from "./memoCompare";
-import styles from "./modalStyles";
-import type { TextInputProps } from "react-native-paper/lib/typescript/components/TextInput/TextInput";
+} from 'react'
+import { FlatList, TouchableOpacity, View, Modal } from 'react-native'
+import { TextInput, Divider, Text, useTheme } from 'react-native-paper'
+import type { DropdownProps } from './types'
+import memoCompare from './memoCompare'
+import styles from './modalStyles'
+import type { TextInputProps } from 'react-native-paper/lib/typescript/components/TextInput/TextInput'
 
-const ItemSeparatorComponent = () => <Divider style={styles.divider} />;
+const ItemSeparatorComponent = () => <Divider style={styles.divider} />
 
 type ModalDropdownProps = {
   renderSearchInput?: (
-    props: Omit<TextInputProps, "theme">
-  ) => React.ReactElement;
-} & DropdownProps;
+    props: Omit<TextInputProps, 'theme'>
+  ) => React.ReactElement
+} & DropdownProps
 
 const ModalDropdown: React.FC<ModalDropdownProps> = forwardRef(
   (
@@ -28,14 +28,14 @@ const ModalDropdown: React.FC<ModalDropdownProps> = forwardRef(
       inputValue,
       options,
       renderOption,
-      noItemsLabel = "No items",
+      noItemsLabel = 'No items',
       renderNoItems = () => (
         <View style={styles.noItems}>
           <Text>{noItemsLabel}</Text>
         </View>
       ),
-      renderSearchInput = (props: Omit<TextInputProps, "theme">) => (
-        <TextInput {...props} />
+      renderSearchInput = (props: Omit<TextInputProps, 'theme'>) => (
+        <TextInput mode='outlined' {...props} />
       ),
       renderHost,
       onPress,
@@ -49,13 +49,14 @@ const ModalDropdown: React.FC<ModalDropdownProps> = forwardRef(
     },
     ref
   ) => {
-    const { colors } = useTheme();
+    const { colors } = useTheme()
     if (!renderHost) {
       renderHost = (props) => (
         <TextInput
+          mode='outlined'
           right={
             <TextInput.Icon
-              name="arrow-down"
+              name='arrow-down'
               color={colors.primary}
               onPress={toggleMenu}
               size={20}
@@ -63,44 +64,44 @@ const ModalDropdown: React.FC<ModalDropdownProps> = forwardRef(
           }
           {...props}
         />
-      );
+      )
     }
 
-    const [open, setOpen] = useState(false);
+    const [open, setOpen] = useState(false)
     const toggleMenu = useCallback(() => {
       if (open) {
-        closeMenu();
+        closeMenu()
       } else {
-        openMenu();
+        openMenu()
       }
-    }, []);
+    }, [])
     const openMenu = useCallback(() => {
-      setOpen(true);
-      onOpen && onOpen();
-    }, []);
+      setOpen(true)
+      onOpen && onOpen()
+    }, [])
     const closeMenu = useCallback(() => {
-      setOpen(false);
-      onClose && onClose();
-    }, []);
+      setOpen(false)
+      onClose && onClose()
+    }, [])
 
     const onTextInput = useCallback((v) => {
-      openMenu();
-      onChangeText && onChangeText(v);
-    }, []);
+      openMenu()
+      onChangeText && onChangeText(v)
+    }, [])
 
     useLayoutEffect(() => {
       if (openOnMount) {
-        openMenu();
+        openMenu()
       }
-    }, []);
+    }, [])
 
-    const inputRef = useRef(null);
+    const inputRef = useRef(null)
     useImperativeHandle(ref, () => ({
       openMenu,
       closeMenu,
       toggleMenu,
       ...(inputRef.current as any),
-    }));
+    }))
     return (
       <>
         <TouchableOpacity onPress={toggleMenu}>
@@ -108,7 +109,7 @@ const ModalDropdown: React.FC<ModalDropdownProps> = forwardRef(
             {renderHost({
               value: inputValue,
               onFocus: openMenu,
-              pointerEvents: "none",
+              pointerEvents: 'none',
               onChangeText: onTextInput,
               style,
               ...props,
@@ -118,7 +119,7 @@ const ModalDropdown: React.FC<ModalDropdownProps> = forwardRef(
         <Modal
           visible={open}
           onRequestClose={closeMenu}
-          animationType="slide"
+          animationType='slide'
           style={styles.menu}
         >
           {open
@@ -127,12 +128,12 @@ const ModalDropdown: React.FC<ModalDropdownProps> = forwardRef(
                 autoFocus: true,
                 value: inputValue,
                 onChangeText: onTextInput,
-                style: { ...(style as any), width: "100%" },
+                style: { ...(style as any), width: '100%' },
                 ...props,
               })
             : null}
           <FlatList
-            keyboardShouldPersistTaps={"always"}
+            keyboardShouldPersistTaps={'always'}
             style={styles.flatList}
             ItemSeparatorComponent={ItemSeparatorComponent}
             data={options}
@@ -142,8 +143,8 @@ const ModalDropdown: React.FC<ModalDropdownProps> = forwardRef(
           />
         </Modal>
       </>
-    );
+    )
   }
-);
+)
 
-export default memo(ModalDropdown, memoCompare);
+export default memo(ModalDropdown, memoCompare)

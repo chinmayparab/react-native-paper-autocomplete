@@ -19,22 +19,22 @@ import {
   Autocomplete,
   FlatDropdown,
   ModalDropdown,
-} from "@telenko/react-native-paper-autocomplete";
+} from '@telenko/react-native-paper-autocomplete'
 ```
 
 3. Using Autocomplete with multiple mode
 
 ```tsx
 const SomeForm: React.FC = () => {
-  const [selectedIds, setIds] = useState([]);
+  const [selectedIds, setIds] = useState([])
   const options = useMemo(
     () => [
-      { label: "option 1", value: "1" },
-      { label: "option 2", value: "2" },
-      { label: "option 3", value: "3" },
+      { label: 'option 1', value: '1' },
+      { label: 'option 2', value: '2' },
+      { label: 'option 3', value: '3' },
     ],
     []
-  );
+  )
   return (
     <Autocomplete
       multiple
@@ -42,25 +42,25 @@ const SomeForm: React.FC = () => {
       onChange={setIds}
       options={options}
     />
-  );
-};
+  )
+}
 ```
 
 4. Using Autocomplete with single mode
 
 ```tsx
 const SomeForm: React.FC = () => {
-  const [id, setId] = useState("");
+  const [id, setId] = useState('')
   const options = useMemo(
     () => [
-      { label: "option 1", value: "1" },
-      { label: "option 2", value: "2" },
-      { label: "option 3", value: "3" },
+      { label: 'option 1', value: '1' },
+      { label: 'option 2', value: '2' },
+      { label: 'option 3', value: '3' },
     ],
     []
-  );
-  return <Autocomplete value={id} onChange={setId} options={options} />;
-};
+  )
+  return <Autocomplete value={id} onChange={setId} options={options} />
+}
 ```
 
 5.  For more examples go to [showcase](#Showcase) section or checkout [stories of storybook](https://github.com/telenko/react-native-paper-autocomplete/tree/main/storybook/storybook/stories)
@@ -76,7 +76,7 @@ const SomeForm: React.FC = () => {
 1. ## Autocomplete
 
    ```ts
-   import { Autocomplete } from "@telenko/react-native-paper-autocomplete";
+   import { Autocomplete } from '@telenko/react-native-paper-autocomplete'
    ```
 
    ### Autocomplete props:
@@ -154,7 +154,7 @@ const SomeForm: React.FC = () => {
    import {
      FlatDropdown, // used as default dropdown for single mode
      ModalDropdown, // used as default dropdown for multiple mode
-   } from "@telenko/react-native-paper-autocomplete";
+   } from '@telenko/react-native-paper-autocomplete'
    ```
 
    ### Dropdown props:
@@ -253,9 +253,9 @@ const SomeForm: React.FC = () => {
   onChange={setValue}
   style={{ width: 300 }}
   options={[
-    { value: "1", label: "option 1" },
-    { value: "2", label: "option 2" },
-    { value: "3", label: "option 3" },
+    { value: '1', label: 'option 1' },
+    { value: '2', label: 'option 2' },
+    { value: '3', label: 'option 3' },
   ]}
 />
 ```
@@ -272,9 +272,9 @@ const SomeForm: React.FC = () => {
   onChange={setValue}
   style={{ width: 300 }}
   options={[
-    { value: "1", label: "option 1" },
-    { value: "2", label: "option 2" },
-    { value: "3", label: "option 3" },
+    { value: '1', label: 'option 1' },
+    { value: '2', label: 'option 2' },
+    { value: '3', label: 'option 3' },
   ]}
 />
 ```
@@ -291,19 +291,19 @@ const SomeForm: React.FC = () => {
   style={{ width: 300 }}
   options={[
     {
-      value: "1",
-      label: "option 1",
-      description: "some description 1",
+      value: '1',
+      label: 'option 1',
+      description: 'some description 1',
     },
     {
-      value: "2",
-      label: "option 2",
-      description: "some description 2",
+      value: '2',
+      label: 'option 2',
+      description: 'some description 2',
     },
     {
-      value: "3",
-      label: "option 3",
-      description: "some description 3",
+      value: '3',
+      label: 'option 3',
+      description: 'some description 3',
     },
   ]}
   renderOption={({ selected, onSelect, label }, { description }) => {
@@ -312,14 +312,14 @@ const SomeForm: React.FC = () => {
         onPress={onSelect}
         title={label}
         description={description}
-        left={(props) => <List.Icon {...props} icon="mail" />}
+        left={(props) => <List.Icon {...props} icon='mail' />}
         right={
           selected
-            ? (props) => <List.Icon {...props} icon="check" />
+            ? (props) => <List.Icon {...props} icon='check' />
             : undefined
         }
       />
-    );
+    )
   }}
 />
 ```
@@ -336,38 +336,38 @@ const SomeForm: React.FC = () => {
   style={{ width: 300 }}
   options={[
     {
-      value: "1",
-      label: "option 1",
-      description: "some description 1",
+      value: '1',
+      label: 'option 1',
+      description: 'some description 1',
     },
     {
-      value: "2",
-      label: "option 2",
-      description: "some description 2",
+      value: '2',
+      label: 'option 2',
+      description: 'some description 2',
     },
     {
-      value: "3",
-      label: "option 3",
-      description: "some description 3",
+      value: '3',
+      label: 'option 3',
+      description: 'some description 3',
     },
   ]}
   filterOptions={(options, input) => {
     if (!input) {
-      return options;
+      return options
     }
     const includesIgnoreNoWhiteSpaceCase = (a: string, b: string): boolean => {
-      const optionQuery = (a || "").replace(/\s/g, "").toUpperCase();
-      const inputQuery = (b || "").replace(/\s/g, "").toUpperCase();
+      const optionQuery = (a || '').replace(/\s/g, '').toUpperCase()
+      const inputQuery = (b || '').replace(/\s/g, '').toUpperCase()
       return (
         optionQuery.includes(inputQuery) || inputQuery.includes(optionQuery)
-      );
-    };
+      )
+    }
     return options.filter((option) => {
       return (
         includesIgnoreNoWhiteSpaceCase(option.label, input) ||
         includesIgnoreNoWhiteSpaceCase(option.description, input)
-      );
-    });
+      )
+    })
   }}
   renderDropdown={(props) => <FlatDropdown menuOffset={40} {...props} />}
   renderOption={({ selected, onSelect, label }, { description }) => {
@@ -376,14 +376,14 @@ const SomeForm: React.FC = () => {
         onPress={onSelect}
         title={label}
         description={description}
-        left={(props) => <List.Icon {...props} icon="folder" />}
+        left={(props) => <List.Icon {...props} icon='folder' />}
         right={
           selected
-            ? (props) => <List.Icon {...props} icon="check" />
+            ? (props) => <List.Icon {...props} icon='check' />
             : undefined
         }
       />
-    );
+    )
   }}
 />
 ```
@@ -400,8 +400,9 @@ const SomeForm: React.FC = () => {
       {...props}
       renderSearchInput={(props) => (
         <TextInput
+          mode='outlined'
           {...props}
-          left={<TextInput.Icon name="arrow-down" size={20} />}
+          left={<TextInput.Icon name='arrow-down' size={20} />}
         />
       )}
     />
@@ -410,9 +411,9 @@ const SomeForm: React.FC = () => {
   onChange={setValue}
   style={{ width: 300 }}
   options={[
-    { value: "1", label: "option 1" },
-    { value: "2", label: "option 2" },
-    { value: "3", label: "option 3" },
+    { value: '1', label: 'option 1' },
+    { value: '2', label: 'option 2' },
+    { value: '3', label: 'option 3' },
   ]}
 />
 ```
@@ -425,7 +426,7 @@ const SomeForm: React.FC = () => {
 <Autocomplete
   multiple
   renderSelectedItem={({ label, value, onDelete }) => (
-    <Chip key={value} icon="folder" mode="outlined" onClose={onDelete}>
+    <Chip key={value} icon='folder' mode='outlined' onClose={onDelete}>
       {label}
     </Chip>
   )}
@@ -433,9 +434,9 @@ const SomeForm: React.FC = () => {
   onChange={setValue}
   style={{ width: 300 }}
   options={[
-    { value: "1", label: "option 1" },
-    { value: "2", label: "option 2" },
-    { value: "3", label: "option 3" },
+    { value: '1', label: 'option 1' },
+    { value: '2', label: 'option 2' },
+    { value: '3', label: 'option 3' },
   ]}
 />
 ```
@@ -454,7 +455,7 @@ const SomeForm: React.FC = () => {
   renderHelper={
     value.length !== 2
       ? () => (
-          <HelperText type="error" visible>
+          <HelperText type='error' visible>
             You should select 2 items
           </HelperText>
         )
@@ -463,9 +464,9 @@ const SomeForm: React.FC = () => {
   onChange={setValue}
   style={{ width: 300 }}
   options={[
-    { value: "1", label: "option 1" },
-    { value: "2", label: "option 2" },
-    { value: "3", label: "option 3" },
+    { value: '1', label: 'option 1' },
+    { value: '2', label: 'option 2' },
+    { value: '3', label: 'option 3' },
   ]}
 />
 ```
@@ -481,9 +482,9 @@ const SomeForm: React.FC = () => {
   onChange={setValue}
   style={{ width: 300 }}
   options={[
-    { value: "1", label: "option 1" },
-    { value: "2", label: "option 2" },
-    { value: "3", label: "option 3" },
+    { value: '1', label: 'option 1' },
+    { value: '2', label: 'option 2' },
+    { value: '3', label: 'option 3' },
   ]}
 />
 ```
@@ -496,10 +497,10 @@ const SomeForm: React.FC = () => {
 <Autocomplete
   menuOffset={15}
   renderHost={() => (
-    <Button mode="contained">
+    <Button mode='contained'>
       {value
         ? options.find((op) => op.value === value)?.label
-        : "Select value..."}
+        : 'Select value...'}
     </Button>
   )}
   filterOptions={(options) => options}
@@ -524,9 +525,9 @@ const SomeForm: React.FC = () => {
   style={{ width: 300 }}
   inputValue={input}
   options={[
-    { value: "1", label: "option 1" },
-    { value: "2", label: "option 2" },
-    { value: "3", label: "option 3" },
+    { value: '1', label: 'option 1' },
+    { value: '2', label: 'option 2' },
+    { value: '3', label: 'option 3' },
   ]}
   renderOption={({ item }) => (
     <Menu.Item onPress={() => {}} title={item.label} />
@@ -547,9 +548,9 @@ const SomeForm: React.FC = () => {
   style={{ width: 300 }}
   inputValue={input}
   options={[
-    { value: "1", label: "option 1" },
-    { value: "2", label: "option 2" },
-    { value: "3", label: "option 3" },
+    { value: '1', label: 'option 1' },
+    { value: '2', label: 'option 2' },
+    { value: '3', label: 'option 3' },
   ]}
   renderOption={({ item }) => (
     <Menu.Item onPress={() => {}} title={item.label} />
@@ -567,12 +568,12 @@ import {
   ModalDropdown,
   Autocomplete,
   AutocompleteProps,
-} from "@telenko/react-native-paper-autocomplete";
-import React, { useState } from "react";
+} from '@telenko/react-native-paper-autocomplete'
+import React, { useState } from 'react'
 
 const AutocompleteMixed: React.FC<AutocompleteProps> = (props) => {
-  const [modal, setModal] = useState(false);
-  const [currentOpen, setCurrentOpen] = useState(props.openOnMount);
+  const [modal, setModal] = useState(false)
+  const [currentOpen, setCurrentOpen] = useState(props.openOnMount)
   return (
     <Autocomplete
       renderDropdown={(props) =>
@@ -583,17 +584,17 @@ const AutocompleteMixed: React.FC<AutocompleteProps> = (props) => {
         )
       }
       onClose={() => {
-        setCurrentOpen(false);
-        setModal(false);
+        setCurrentOpen(false)
+        setModal(false)
       }}
       onChangeText={(v) => {
-        setCurrentOpen(true);
-        setModal(v.length > 0);
+        setCurrentOpen(true)
+        setModal(v.length > 0)
       }}
       {...props}
     />
-  );
-};
+  )
+}
 ```
 
 ![mixed mode](https://media.giphy.com/media/U3rNdlAdLs8gfYa9qi/giphy.gif)

@@ -7,19 +7,19 @@ import React, {
   forwardRef,
   useImperativeHandle,
   useRef,
-} from "react";
-import { FlatList, TouchableOpacity } from "react-native";
-import { Menu, Divider, Text, TextInput, useTheme } from "react-native-paper";
-import type { DropdownProps } from "./types";
-import memoCompare from "./memoCompare";
-import styles from "./flatStyles";
+} from 'react'
+import { FlatList, TouchableOpacity } from 'react-native'
+import { Menu, Divider, Text, TextInput, useTheme } from 'react-native-paper'
+import type { DropdownProps } from './types'
+import memoCompare from './memoCompare'
+import styles from './flatStyles'
 
 type FlatDropdownProps = {
-  menuOffset?: number;
-} & DropdownProps;
+  menuOffset?: number
+} & DropdownProps
 
-const MENU_DEFAULT_OFFSET = 65;
-const ItemSeparatorComponent = () => <Divider style={styles.divider} />;
+const MENU_DEFAULT_OFFSET = 65
+const ItemSeparatorComponent = () => <Divider style={styles.divider} />
 
 const FlatDropdown: React.FC<FlatDropdownProps> = forwardRef(
   (
@@ -27,7 +27,7 @@ const FlatDropdown: React.FC<FlatDropdownProps> = forwardRef(
       inputValue,
       options,
       renderOption,
-      noItemsLabel = "No items",
+      noItemsLabel = 'No items',
       renderNoItems = () => <Text style={styles.noItems}>{noItemsLabel}</Text>,
       renderHost,
       onPress,
@@ -41,13 +41,14 @@ const FlatDropdown: React.FC<FlatDropdownProps> = forwardRef(
     },
     ref
   ) => {
-    const { colors } = useTheme();
+    const { colors } = useTheme()
     if (!renderHost) {
       renderHost = (props) => (
         <TextInput
+          mode='outlined'
           right={
             <TextInput.Icon
-              name="arrow-down"
+              name='arrow-down'
               color={colors.primary}
               onPress={toggleMenu}
               size={20}
@@ -55,50 +56,50 @@ const FlatDropdown: React.FC<FlatDropdownProps> = forwardRef(
           }
           {...props}
         />
-      );
+      )
     }
 
-    const [open, setOpen] = useState(false);
+    const [open, setOpen] = useState(false)
     const [optionWidth, setOptionWidth] = useState(
       (props.style as any)?.width || 100
-    );
+    )
     const toggleMenu = useCallback(() => {
       if (open) {
-        closeMenu();
+        closeMenu()
       } else {
-        openMenu();
+        openMenu()
       }
-    }, []);
+    }, [])
     const openMenu = useCallback(() => {
-      setOpen(true);
-      onOpen && onOpen();
-    }, []);
+      setOpen(true)
+      onOpen && onOpen()
+    }, [])
     const closeMenu = useCallback(() => {
-      setOpen(false);
-      onClose && onClose();
-    }, []);
+      setOpen(false)
+      onClose && onClose()
+    }, [])
     const onLayoutCb = useCallback(({ nativeEvent: { layout: { width } } }) => {
-      setOptionWidth(width);
-    }, []);
+      setOptionWidth(width)
+    }, [])
     const onTextInput = useCallback((v) => {
-      onChangeText && onChangeText(v);
-      openMenu();
-    }, []);
-    const menuStyles = useMemo(() => ({ marginTop: menuOffset }), [menuOffset]);
+      onChangeText && onChangeText(v)
+      openMenu()
+    }, [])
+    const menuStyles = useMemo(() => ({ marginTop: menuOffset }), [menuOffset])
 
     useLayoutEffect(() => {
       if (openOnMount) {
-        openMenu();
+        openMenu()
       }
-    }, []);
+    }, [])
 
-    const inputRef = useRef(null);
+    const inputRef = useRef(null)
     useImperativeHandle(ref, () => ({
       openMenu,
       closeMenu,
       toggleMenu,
       ...(inputRef.current as any),
-    }));
+    }))
     return (
       <Menu
         style={menuStyles}
@@ -110,7 +111,7 @@ const FlatDropdown: React.FC<FlatDropdownProps> = forwardRef(
               ref: inputRef,
               value: inputValue,
               onFocus: openMenu,
-              pointerEvents: "none",
+              pointerEvents: 'none',
               onChangeText: onTextInput,
               ...props,
             })}
@@ -118,7 +119,7 @@ const FlatDropdown: React.FC<FlatDropdownProps> = forwardRef(
         }
       >
         <FlatList
-          keyboardShouldPersistTaps={"handled"}
+          keyboardShouldPersistTaps={'handled'}
           style={{ ...styles.flatList, width: optionWidth }}
           ItemSeparatorComponent={ItemSeparatorComponent}
           data={options}
@@ -127,8 +128,8 @@ const FlatDropdown: React.FC<FlatDropdownProps> = forwardRef(
           keyExtractor={keyExtractor}
         />
       </Menu>
-    );
+    )
   }
-);
+)
 
-export default memo(FlatDropdown, memoCompare);
+export default memo(FlatDropdown, memoCompare)
