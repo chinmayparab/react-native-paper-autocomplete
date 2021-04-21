@@ -35,7 +35,7 @@ const ModalDropdown: React.FC<ModalDropdownProps> = forwardRef(
         </View>
       ),
       renderSearchInput = (props: Omit<TextInputProps, 'theme'>) => (
-        <TextInput mode='outlined' {...props} />
+        <TextInput {...props} />
       ),
       renderHost,
       onPress,
@@ -53,7 +53,6 @@ const ModalDropdown: React.FC<ModalDropdownProps> = forwardRef(
     if (!renderHost) {
       renderHost = (props) => (
         <TextInput
-          mode='outlined'
           right={
             <TextInput.Icon
               name='arrow-down'

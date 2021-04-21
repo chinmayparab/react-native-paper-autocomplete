@@ -45,7 +45,6 @@ const FlatDropdown: React.FC<FlatDropdownProps> = forwardRef(
     if (!renderHost) {
       renderHost = (props) => (
         <TextInput
-          mode='outlined'
           right={
             <TextInput.Icon
               name='arrow-down'
