@@ -1,8 +1,8 @@
-import React from "react";
-import { StyleSheet } from "react-native";
-import { Menu, useTheme } from "react-native-paper";
-import { Entypo } from "@expo/vector-icons";
-import type { OptionProps } from "./types";
+import React from 'react'
+import { StyleSheet } from 'react-native'
+import { Menu, useTheme } from 'react-native-paper'
+import Entypo from 'react-native-vector-icons/Entypo'
+import type { OptionProps } from './types'
 
 const Option: React.FC<OptionProps> = ({
   label,
@@ -11,7 +11,7 @@ const Option: React.FC<OptionProps> = ({
   style,
   value,
 }) => {
-  const { colors } = useTheme();
+  const { colors } = useTheme()
   return (
     <>
       <Menu.Item
@@ -27,20 +27,20 @@ const Option: React.FC<OptionProps> = ({
       {selected ? (
         <Entypo
           selectable
-          name="check"
+          name='check'
           size={15}
           color={colors.primary}
           style={styles.icon}
         />
       ) : null}
     </>
-  );
-};
+  )
+}
 
 const styles = StyleSheet.create({
-  icon: { position: "absolute", top: 10, left: 10 },
+  icon: { position: 'absolute', top: 10, left: 10 },
   selectedItem: { paddingLeft: 20 },
-  selectedTitle: { fontWeight: "700" }
-});
+  selectedTitle: { fontWeight: '700' },
+})
 
-export default Option;
+export default Option
